@@ -1,6 +1,8 @@
-import { sequelize }  from 'sequelize';
+import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
+// let sequelizes;
+
 
 const sequelize = new Sequelize('bookmarker', 'postgres', 'C@rrib3an!', {
   host: 'localhost',
@@ -15,4 +17,5 @@ try {
   console.error('Unable to connect to the database:', error);
 }
 
-module.exports = sequelize;
+
+export default sequelize;
