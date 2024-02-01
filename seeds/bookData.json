@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "book": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "publish_date": 1918,
+    "page_count": 401,
+    "thumbnail": "http://books.google.com/books/content?id=s1gVAAAAYAAJ&printsec=frontcover&img=1&zoom=3&edge=curl&imgtk=AFLRE72mTo-31Um-wkJ7dBRbJ56yp1wSJwl20p9Bz_qRuOapdr2Cf3VlpxyNiuCG819C3h3L4FTypSGCEwdI0HsYcFIn5a4PwmyJlRZXrmhTKfTVbPm6Pn9MIb1uTfJQu9bvgqopXvvV&source=gbs_api",
+    "description": "Shooter"
+  }
+]
