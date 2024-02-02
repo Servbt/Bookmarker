@@ -1,9 +1,12 @@
-import sequelize  from '../config/connection';
-import { User, Book, Tag, Review }  from '../models';
-
-import userData  from './userData.json';
-import reviewData  from './reviewData.json';
-import bookData  from './bookData.json';
+// import { User, Book, Tag, Review }  from '../models/index.js';
+import User from '../models/User.js'
+import Book from '../models/Book.js'
+import Review from '../models/Review.js'
+// import sequelize from '../config/connection.js';
+// const sequelize = await import(`file:///C:/Users/arian/Documents/Development/My%20projects/BookMarker/config/connection`);
+import userData  from './userData.json' assert { type: "json" };
+import reviewData  from './reviewData.json' assert { type: "json" };
+import bookData  from './bookData.json' assert { type: "json" };
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: false });

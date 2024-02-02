@@ -2,7 +2,7 @@
   "name": "bookmarker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "seeds/seed.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

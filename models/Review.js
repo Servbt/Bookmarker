@@ -1,4 +1,4 @@
-import { Model, DataTypes }  from 'sequelize';
+import { Model, DataTypes }  from '../../node_modules/sequelize/lib/index.js';
 import sequelize  from '../config/connection';
 // import User  from './User';
 // import Game  from './Game';
@@ -32,7 +32,7 @@ Review.init(
         key: 'id'
       }
     },
-    bood_id: {
+    book_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'books',

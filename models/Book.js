@@ -1,4 +1,4 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes } from '../../node_modules/sequelize/lib/index.js';
 import sequelize from '../config/connection.js';
 
 class Book extends Model { }

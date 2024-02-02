@@ -1,6 +1,7 @@
-import { Model, DataTypes } from 'sequelize';
+import Model from 'sequelize';
+import DataTypes from 'sequelize';
 import bcrypt from 'bcrypt';
-import sequelize from '../config/connection';
+import sequelize from '../../config/connection';
 
 class User extends Model {
   checkPassword(loginPw) {
