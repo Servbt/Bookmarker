@@ -1,5 +1,5 @@
 const User = require('./User');
-const Game = require('./Game');
+const Book = require('./Book');
 const Review = require('./Review');
 const Tag = require('./Tag');
 
@@ -29,7 +29,7 @@ Book.hasMany(Review, {
 
 module.exports = {
   User,
-  Game,
+  Book,
   Review,
   Tag,
 };
