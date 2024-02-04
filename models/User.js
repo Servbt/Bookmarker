@@ -1,7 +1,6 @@
-import sequelize from '../config/connection.js';
-import Model from 'sequelize';
-import DataTypes from 'sequelize';
-import bcrypt from 'bcrypt';
+const {Model, DataTypes} = require('sequelize');
+const bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
 
 
 class User extends Model {
@@ -45,4 +44,4 @@ User.init(
   }
 );
 
-export default User;
+module.exports = User;

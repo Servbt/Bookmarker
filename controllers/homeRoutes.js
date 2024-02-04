@@ -1,8 +1,7 @@
-import express from 'express';
-const router = express.Router();
-import User from '../models/User.js';
-import Book from '../models/Book.js';
-import Tag from '../models/Tag.js';
+const router = require('express').Router();
+// import User from '../models/User.js';
+// import Book from '../models/Book.js';
+// import Tag from '../models/Tag.js';
 
 router.get('/', (req, res) => {
     res.render('index.ejs');
@@ -19,5 +18,4 @@ router.get('/users', async (req, res) => {
       res.status(500).json(err);
     }
   });
-
-export default router;
+  module.exports = router;

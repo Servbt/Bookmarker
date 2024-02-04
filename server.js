@@ -1,13 +1,9 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-// import mainController from './controllers/mainController.js';
-import routes from './controllers/index.js';
-import session from 'express-session';
-
-import sequelize from './config/connection.js';
-import SequelizeStore from 'connect-session-sequelize';
-
-const SequelizesStore = SequelizeStore(session.Store);
+const express = require('express');
+const bodyParser = require('body-parser');
+const routes = require('./controllers/index.js');
+const session = require('express-session');
+const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const port = 3000;
@@ -21,7 +17,7 @@ const sess = {
   },
   resave: false,
   saveUninitialized: true,
-  store: new SequelizesStore({
+  store: new SequelizeStore({
     db: sequelize,
   }),
 };

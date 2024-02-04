@@ -1,7 +1,5 @@
-import express from 'express';
-import homeRoutes from './homeRoutes.js'
-
-const router = express.Router();
+const router = require('express').Router();
+const homeRoutes = require('./homeRoutes');
 
 router.use('/', homeRoutes);
-export default router;
+module.exports = router;

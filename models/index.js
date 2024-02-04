@@ -1,7 +1,7 @@
-import User from './User';
-import Book from'./Book';
-import Review from'./Review';
-import Tag from'./Tag';
+const User = require('./User');
+const Game = require('./Game');
+const Review = require('./Review');
+const Tag = require('./Tag');
 
 Book.belongsToMany(User, {
   through: Tag,
@@ -27,9 +27,9 @@ Book.hasMany(Review, {
   onDelete: 'CASCADE'
 });
 
-export default {
+module.exports = {
   User,
-  Book,
+  Game,
   Review,
   Tag,
 };

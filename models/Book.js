@@ -1,6 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/connection.js';
-
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection.js');
 class Book extends Model { }
 
 Book.init(
@@ -20,7 +19,7 @@ Book.init(
     },
     publish_date: {
       type: DataTypes.INTEGER
-    }, 
+    },
     page_count: {
       type: DataTypes.INTEGER
     },
@@ -39,4 +38,4 @@ Book.init(
   }
 );
 
-export default Book;
+module.exports = Book;
