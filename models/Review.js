@@ -1,4 +1,4 @@
-import { Model, DataTypes }  from '../../node_modules/sequelize/lib/index.js';
+import { Model, DataTypes }  from 'sequelize';
 import sequelize  from '../config/connection';
 // import User  from './User';
 // import Game  from './Game';

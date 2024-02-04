@@ -19,4 +19,3 @@ const sequelize = new Sequelize('bookmarker', 'postgres', 'C@rrib3an!', {
 
 
 export default sequelize;
-i

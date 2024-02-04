@@ -1,9 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import mainController from './controllers/mainController.js';
+// import mainController from './controllers/mainController.js';
+import routes from './controllers/index.js';
 import session from 'express-session';
-// import dotenv from 'dotenv';
-// dotenv.config();
 
 import sequelize from './config/connection.js';
 import SequelizeStore from 'connect-session-sequelize';
@@ -33,7 +32,7 @@ app.use(session(sess));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.use('/', mainController);
+app.use(routes);
 
 
 sequelize.sync({ force: false }).then(() => {

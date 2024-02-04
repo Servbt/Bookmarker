@@ -1,7 +1,8 @@
+import sequelize from '../config/connection.js';
 import Model from 'sequelize';
 import DataTypes from 'sequelize';
 import bcrypt from 'bcrypt';
-import sequelize from '../../config/connection';
+
 
 class User extends Model {
   checkPassword(loginPw) {
