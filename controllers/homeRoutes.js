@@ -15,7 +15,7 @@ router.get('/login', async (req, res) => {
     return;
   } else {
     const loginNeed = true;
-    res.render('log-sign-page.ejs', {needLogin: loginNeed});
+    res.render('log-sign-page.ejs', { needLogin: loginNeed });
   }
 
 });
@@ -25,6 +25,28 @@ router.get('/signup', async (req, res) => {
   res.render('log-sign-page.ejs');
 });
 
+
+//render homepage
+router.get('/home', async (req, res) => {
+  try {
+    if (!req.session.logged_in) {
+      res.redirect('/login');
+      return;
+    }
+    // USER INFO
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+    const user = userData.get({ plain: true });
+    res.render('home.ejs', {
+      user,
+      logged_in: req.session.logged_in,
+    })
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 module.exports = router;
