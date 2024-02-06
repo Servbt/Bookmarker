@@ -13,14 +13,16 @@ router.get('/login', async (req, res) => {
   if (req.session.logged_in) {
     res.render('home.ejs');
     return;
+  } else {
+    const loginNeed = true;
+    res.render('log-sign-page.ejs', {needLogin: loginNeed});
   }
-  res.render('log-sign-link.ejs');
 
 });
 
 // render signup page
 router.get('/signup', async (req, res) => {
-  res.render('log-sign-link.ejs');
+  res.render('log-sign-page.ejs');
 });
 
 
