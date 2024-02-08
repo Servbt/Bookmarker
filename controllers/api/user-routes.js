@@ -76,7 +76,7 @@ router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
             // takes user back to landing page
-            res.render("landing.ejs");
+            res.redirect("/");
             res.status(204).end();
         });
     } else {
