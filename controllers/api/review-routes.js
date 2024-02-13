@@ -1,6 +1,6 @@
 
 const router = require("express").Router();
-const { Review } = require("../../models");
+const { Review, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 router.post("/", withAuth, async (req, res) => {
@@ -46,12 +46,24 @@ router.get("/all", withAuth, async (req, res) => {
   }
 });
 
-// Gets all review data for client
-router.get("/all", withAuth, async (req, res) => {
+// Gets all review data for a certain user
+router.post("/user-all", async (req, res) => {
+  let userFound = req.body.name
   try {
-
+    // first we find the user via their name
+    const user = await User.findOne(
+      {
+        where: {
+          name: userFound
+        },
+        attributes: {
+          exclude: ['password']
+        }
+      }
+    );
+    // then when get the user we capture the ID and use it to filter out the reviews
     const reviews = await Review.findAll(
-      { where: { user_id: req.session.user_id } }
+      { where: { user_id: user.id } }
     );
     res.status(200).json(reviews);
   } catch (err) {
