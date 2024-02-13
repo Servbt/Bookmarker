@@ -84,47 +84,6 @@ router.post('/logout', (req, res) => {
     }
 });
 
-
-// Add Book to user collection
-router.post('/add', async (req, res) => {
-    try {
-        const userData = await Tag.create({
-            user_id: req.session.user_id,
-            book_id: req.body.book_id,
-        });
-        res.status(200).json(userData);
-    } catch (err) {
-        console.log(err);
-        res.status(400).json(err);
-    }
-});
-
-
-// Delete book from user collection
-router.delete('/delete/:id', async (req, res) => {
-    try {
-        console.log('!!! SUPER IMPORTANT', req.params.id, req.session.user_id);
-        const bookData = await Tag.destroy({
-            where: {
-                book_id: req.params.id,
-                user_id: req.session.user_id,
-            },
-        });
-
-        if (!bookData) {
-            res.status(404).json({ message: 'No book found with this id!' });
-            return;
-        }
-
-        res.status(200).json(bookData);
-    } catch (err) {
-        console.log(err)
-        res.status(400).json(err);
-    }
-});
-
-
-
 // Get single user by id
 router.get('/:id', async (req, res) => {
     try {
