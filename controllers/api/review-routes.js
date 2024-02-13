@@ -77,4 +77,16 @@ router.post("/recent-reviews", withAuth, async (req, res) => {
   }
 });
 
+
+// gets all reviews
+router.get("/all-reviews", async (req, res) => {
+  try {
+    const reviews = await Review.findAll();
+    res.status(200).json(reviews);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 module.exports = router;
