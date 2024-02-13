@@ -14,9 +14,13 @@ Review.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    book: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     content: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     mark_read: {
       type: DataTypes.BOOLEAN,
@@ -32,13 +36,6 @@ Review.init(
         model: 'users',
         key: 'id'
       }
-    },
-    book_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'books',
-        key: 'id'
-      }
     }
   },
   {
@@ -48,5 +45,6 @@ Review.init(
     modelName: 'review'
   }
 );
+
 
 module.exports = Review;

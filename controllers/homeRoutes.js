@@ -2,9 +2,18 @@ const router = require('express').Router();
 const axios = require('axios').default;
 
 const { Book, User, Review, Tag } = require('../models');
-
 router.get('/', (req, res) => {
-  res.render('landing.ejs');
+  let test = [];
+  axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `)
+    .then(response => {
+      const bookArr = response.data.items;
+      bookArr.forEach(item => {
+        test.push(item.volumeInfo.title)
+      });
+      console.log(test);
+      res.render('landing.ejs', { bookList: test });
+    })
+    .catch(err => console.log(err))
 });
 
 // render login page
@@ -38,7 +47,7 @@ router.get('/home', async (req, res) => {
       attributes: { exclude: ['password'] },
     });
 
-    
+
     const user = userData.get({ plain: true });
     res.render('home.ejs', {
       user,
