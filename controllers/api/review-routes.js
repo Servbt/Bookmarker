@@ -15,4 +15,29 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
+router.get("/", withAuth, async (req, res) => {
+  try {
+
+    const reviews = await Review.findOne(
+      { where: { user_id: req.session.user_id } }
+    );
+    res.status(200).json(reviews);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.get("/all", withAuth, async (req, res) => {
+  try {
+
+    const reviews = await Review.findAll(
+      { where: { user_id: req.session.user_id } }
+    );
+    res.status(200).json(reviews);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
