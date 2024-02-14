@@ -91,16 +91,30 @@ router.get("/all-reviews", async (req, res) => {
   }
 });
 
-router.post("/edit-review",withAuth, async (req, res) => {
+// updates a review's content or mark
+router.post("/edit-review", withAuth, async (req, res) => {
   // grabs data from edit form
   let bookfound = req.body.book;
   let newReview = req.body.content;
-  let newMark = req.body.mark_read;
+  // let newMark = req.body.mark_read;
   try {
     // updates the review by finding it with the data we got from the edit form
-    const review = await Review.update({ content: newReview , mark_read: newMark},
+    const review = await Review.update({ content: newReview, mark_read: newMark },
       { where: { book: bookfound, user_id: req.session.user_id } });
     res.status(200).json(review);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// route for deleting a review from database
+router.delete("/delete-review", withAuth, async (req, res) => {
+  let bookfound = req.body.book;
+  try {
+    const reviews = await Review.destroy(
+      { where: { book: bookfound, user_id: req.session.user_id } }
+    );
+    res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
   }
