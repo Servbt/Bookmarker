@@ -2,10 +2,13 @@ const router = require('express').Router();
 const axios = require('axios').default;
 
 const { Book, User, Review, Tag } = require('../models');
+
+// home page, calling google api for a sample selection of books
 router.get('/', (req, res) => {
   let test = [];
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `)
     .then(response => {
+      // going through the response and targeting the title property for each book "item"
       const bookArr = response.data.items;
       bookArr.forEach(item => {
         test.push(item.volumeInfo.title)
