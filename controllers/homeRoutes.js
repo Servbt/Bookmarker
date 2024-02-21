@@ -4,21 +4,25 @@ const axios = require('axios').default;
 const { Book, User, Review, Tag } = require('../models');
 
 // home page, calling google api for a sample selection of books
-router.get('/', (req, res) => {
-  let test = [];
-  axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `)
-    .then(response => {
-      // going through the response and targeting the title property for each book "item"
-      const bookArr = response.data.items;
-      bookArr.forEach(item => {
-        test.push(item.volumeInfo.title)
-      });
-      console.log(test);
-      res.render('landing.ejs', { bookList: test });
-    })
-    .catch(err => console.log(err))
-});
+router.get('/', async (req, res) => {
+  try {
+    let test = [];
 
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
+    
+    // going through the response and targeting the title property for each book "item"
+    const bookArr = response.data.items;
+    bookArr.forEach(item => {
+      test.push(item.volumeInfo.title);
+    });
+
+    console.log(test);
+    res.render('landing.ejs', { bookList: test });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 // render login page
 router.get('/login', async (req, res) => {
   // redirect to home if user is logged in
