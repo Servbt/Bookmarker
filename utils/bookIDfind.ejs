@@ -1,0 +1,13 @@
+<script>
+    // POST request made for google api for finding single books with given ID
+    $(function () {
+        $(document).on("click", ".book-title", function (e) {
+            var pID = $(this).find("p").text();
+            $.post("http://localhost:3000/singleBook", { "book": pID },
+                function (data, status) {
+                    window.location.replace("http://localhost:3000/singleBook")
+                    console.log("Data: " + data + "\nStatus: " + status);
+                });
+        });
+    });
+</script>
