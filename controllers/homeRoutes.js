@@ -66,5 +66,29 @@ router.get('/home', async (req, res) => {
   }
 });
 
+// route for single book page
+
+router.post('/search', async (req, res) => {
+  try {
+    let booksrch = req.body.book;
+    console.log(booksrch);
+    let searchList = [];
+
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${booksrch}`);
+    
+    // going through the response and targeting the title property for each book "item"
+    const bookArr = response.data.items;
+    bookArr.forEach(item => {
+      searchList.push(item.volumeInfo.title);
+    });
+
+    console.log(searchList);
+    res.render('landing.ejs', { bookList: searchList });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 module.exports = router;
