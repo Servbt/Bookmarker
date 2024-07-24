@@ -5,8 +5,10 @@
             var pID = $(this).find("p").text();
             $.post("http://localhost:3000/singleBook", { "book": pID },
                 function (data, status) {
-                    window.location.replace("http://localhost:3000/singleBook")
-                    console.log("Data: " + data + "\nStatus: " + status);
+                    // Use the response data (HTML) to replace the current document
+                    document.open();
+                    document.write(data);
+                    document.close();
                 });
         });
     });

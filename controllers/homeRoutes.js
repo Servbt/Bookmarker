@@ -93,7 +93,7 @@ router.post('/search', async (req, res) => {
 router.post('/singleBook', async (req, res) => {
   try {
     let bookID = req.body.book;
-    console.log(bookID);
+    console.log("THIS IS THE ID OF THE BOOK" + bookID);
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
     
@@ -101,8 +101,8 @@ router.post('/singleBook', async (req, res) => {
     const bookData = response.data.volumeInfo;
 
 
-    console.log(bookData);
-    res.render('landing.ejs', { singleBook: bookData });
+    // console.log(bookData);
+    res.render('singleBook.ejs', { singleBook: bookData });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
