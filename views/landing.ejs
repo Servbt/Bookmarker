@@ -20,7 +20,7 @@
     <% if (locals.bookList) { %>
         <% bookList.forEach(book=> { %>
             <h2>
-                <%= book %>
+                <%= book.volumeInfo.title %>
             </h2>
             <% }); %>
                 <% } %>

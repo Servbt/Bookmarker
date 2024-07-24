@@ -10,13 +10,13 @@ router.get('/', async (req, res) => {
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
     
-    // going through the response and targeting the title property for each book "item"
+    // getting each book
     const bookArr = response.data.items;
     bookArr.forEach(item => {
-      test.push(item.volumeInfo.title);
+      test.push(item);
     });
 
-    console.log(test);
+    console.log(test[0].volumeInfo.title);
     res.render('landing.ejs', { bookList: test });
   } catch (err) {
     console.error(err);
@@ -76,13 +76,13 @@ router.post('/search', async (req, res) => {
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${booksrch}`);
     
-    // going through the response and targeting the title property for each book "item"
+    // getting each book
     const bookArr = response.data.items;
     bookArr.forEach(item => {
-      searchList.push(item.volumeInfo.title);
+      searchList.push(item);
     });
 
-    console.log(searchList);
+    console.log(searchList[1].volumeInfo.title);
     res.render('landing.ejs', { bookList: searchList });
   } catch (err) {
     console.error(err);
