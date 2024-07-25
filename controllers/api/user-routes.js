@@ -74,15 +74,20 @@ router.post('/login', async (req, res) => {
 // Logout user
 router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
-        req.session.destroy(() => {
-            // takes user back to landing page
-            res.redirect("/");
-            res.status(204).end();
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Failed to destroy session:', err);
+                res.status(500).end();
+            } else {
+                // Redirect user to landing page
+                res.redirect('/');
+            }
         });
     } else {
         res.status(404).end();
     }
 });
+
 
 // Get single user by id
 router.get('/:id', async (req, res) => {

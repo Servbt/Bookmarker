@@ -58,7 +58,15 @@ router.get("/all", withAuth, async (req, res) => {
     const reviews = await Review.findAll(
       { where: { user_id: req.session.user_id } }
     );
-    res.status(200).json(reviews);
+    // console.log(reviews);
+
+    let test = [];
+    reviews.forEach(review => {
+      test.push(review.book)
+    });
+
+    res.render('reviews.ejs', { reviews: reviews });
+    // res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
   }
