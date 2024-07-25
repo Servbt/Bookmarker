@@ -9,11 +9,12 @@ router.get('/', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID + include their associated Books
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
+      // TODO: just get the reviews the books I can find through the api later with just the id's collected
       // include: [{ model: Book }, { model: Review }],
     });
 
     const user = userData.get({ plain: true });
-    console.log(user);
+    // console.log(user);
 
     res.render('landing.ejs', {
       ...user,
@@ -33,7 +34,7 @@ router.post('/search', async (req, res) => {
     let searchList = [];
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${booksrch}`);
-    
+
     // getting each book
     const bookArr = response.data.items;
     bookArr.forEach(item => {
@@ -55,13 +56,13 @@ router.post('/singleBook', async (req, res) => {
     console.log("THIS IS THE ID OF THE BOOK" + bookID);
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
-    
+
     // getting all data for one book
     const bookData = response.data;
 
 
     // console.log(bookData);
-    res.render('singleBook.ejs', { singleBook: bookData});
+    res.render('singleBook.ejs', { singleBook: bookData });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });

@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
       test.push(item);
     });
 
-    console.log(test[0].volumeInfo.title);
+    // console.log(test[0].volumeInfo.title);
     res.render('landing.ejs', { bookList: test });
   } catch (err) {
     console.error(err);
@@ -55,11 +55,26 @@ router.get('/home', async (req, res) => {
     });
 
 
+    let test = [];
+
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
+    
+    // getting each book this part is for test purposes
+    const bookArr = response.data.items;
+    bookArr.forEach(item => {
+      test.push(item);
+    });
+
+    // console.log(test[0].volumeInfo.title);
+    res.render('landing.ejs', { bookList: test });
+
     const user = userData.get({ plain: true });
-    res.render('home.ejs', {
-      user,
-      logged_in: req.session.logged_in,
-    })
+
+    // will use this later
+    // res.render('home.ejs', {
+    //   user,
+    //   logged_in: req.session.logged_in,
+    // })
 
   } catch (err) {
     res.status(500).json(err);

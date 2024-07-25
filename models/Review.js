@@ -24,7 +24,7 @@ Review.init(
     },
     mark_read: {
       type: DataTypes.BOOLEAN,
-      allowNull: true
+      allowNull: false
     },
     date_created: {
       type: DataTypes.DATE,

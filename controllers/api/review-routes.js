@@ -6,10 +6,27 @@ const withAuth = require("../../utils/auth");
 // makes and saves a review into the data base
 router.post("/", withAuth, async (req, res) => {
   try {
+    let book = req.body.book;
+    let content = req.body.content;
+    let mark_read = req.body.btncheck1;
+    
+    if (mark_read == undefined) {
+      mark_read = false;
+    } else {
+      mark_read = true;
+    };
+
     const newReview = await Review.create({
-      ...req.body,
+      book,
+      content,
+      mark_read,
       user_id: req.session.user_id
     });
+
+    // console.log("THIS IS A BOOOOKKKK!!!!!" + book);
+    // console.log("THIS IS A REVIEWW!!!!!" + newReview);
+    // console.log("THIS IS A CONTENNTTT!!!!!" + content);
+    // console.log("THIS IS A MARKKKK!!!!!" + mark_read);
     res.status(200).json(newReview);
   } catch (err) {
     res.status(500).json(err);
