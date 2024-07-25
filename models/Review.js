@@ -20,11 +20,11 @@ Review.init(
     },
     content: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     mark_read: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: true
     },
     date_created: {
       type: DataTypes.DATE,
