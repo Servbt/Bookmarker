@@ -19,17 +19,10 @@
     <a href="/login" class="d-block">Login</a>
     <a href="/signup">Signup</a>
 
-    <h1>Recommended Series:</h1>
+    <!-- Recommended books -->
     <% if (locals.bookList) { %>
-        <% bookList.forEach(book=> { %>
-            <h2 class="book-title">
-                <%= book.volumeInfo.title %>
-                <p class="visually-hidden">
-                    <%= book.id %>
-                </p>
-            </h2>
-            <% }); %>
-                <% } %>
+        <%- include("./components/recommended.ejs")%>
+            <% } %>
 </body>
 
 <%- include("../utils/bookIDfind.ejs") %>

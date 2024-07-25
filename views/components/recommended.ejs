@@ -1,0 +1,12 @@
+<body>
+    <h1>Recommended Series:</h1>
+
+    <% bookList.forEach(book=> { %>
+        <h2 class="book-title">
+            <%= book.volumeInfo.title %>
+                <p class="visually-hidden">
+                    <%= book.id %>
+                </p>
+        </h2>
+        <% }); %>
+</body>

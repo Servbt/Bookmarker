@@ -54,23 +54,16 @@ router.get('/home', async (req, res) => {
       attributes: { exclude: ['password'] },
     });
 
-
     let books = [];
-
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
     
-    // getting each book this part is for test purposes
+    // getting each book
     const bookArr = response.data.items;
     bookArr.forEach(item => {
       books.push(item);
     });
 
-    // console.log(books[0].volumeInfo.title);
-    // res.render('landing.ejs', { bookList: books });
-
     const user = userData.get({ plain: true });
-
-    // will use this later
     res.render('home.ejs', {
       user,
       logged_in: req.session.logged_in,
