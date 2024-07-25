@@ -12,6 +12,8 @@
 
 <body>
     <%- include("./components/navbar.ejs")%>
+
+        <!-- Display Data from server side on page -->
         <h1 class="test">Single Book Page</h1>
         <% if (locals.singleBook) { %>
             <h2 class="book-title">
@@ -37,7 +39,7 @@
                     <label for="content" class="form-label cust-label pt-1">Content</label>
                     <textarea type="text" class="form-control border border-1 rounded-0 myText"
                         id="exampleFormControlTextarea1" rows="10 " placeholder="this field is not required to mark book read or unread" name="content"></textarea>
-                    <input class="btn btn-primary btn-lg my-3 create-button " type="submit" value="Make Review">
+                    <input class="btn btn-primary btn-lg my-3 create-button " type="submit" value="Make a Mark">
 
                     <!-- boolean checkbox -->
                     <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">

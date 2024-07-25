@@ -6,18 +6,18 @@ const { Book, User, Review, Tag } = require('../models');
 // home page, calling google api for a sample selection of books
 router.get('/', async (req, res) => {
   try {
-    let test = [];
+    let books = [];
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
     
     // getting each book
     const bookArr = response.data.items;
     bookArr.forEach(item => {
-      test.push(item);
+      books.push(item);
     });
 
-    // console.log(test[0].volumeInfo.title);
-    res.render('landing.ejs', { bookList: test });
+    // console.log(books[0].volumeInfo.title);
+    res.render('landing.ejs', { bookList: books });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -55,26 +55,27 @@ router.get('/home', async (req, res) => {
     });
 
 
-    let test = [];
+    let books = [];
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
     
     // getting each book this part is for test purposes
     const bookArr = response.data.items;
     bookArr.forEach(item => {
-      test.push(item);
+      books.push(item);
     });
 
-    // console.log(test[0].volumeInfo.title);
-    res.render('landing.ejs', { bookList: test });
+    // console.log(books[0].volumeInfo.title);
+    // res.render('landing.ejs', { bookList: books });
 
     const user = userData.get({ plain: true });
 
     // will use this later
-    // res.render('home.ejs', {
-    //   user,
-    //   logged_in: req.session.logged_in,
-    // })
+    res.render('home.ejs', {
+      user,
+      logged_in: req.session.logged_in,
+      bookList: books
+    })
 
   } catch (err) {
     res.status(500).json(err);
