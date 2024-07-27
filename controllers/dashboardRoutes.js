@@ -62,7 +62,7 @@ router.post('/singleBook', async (req, res) => {
 
 
     // console.log(bookData);
-    res.render('singleBook.ejs', { singleBook: bookData });
+    res.render('singleBook.ejs', { singleBook: bookData , logged_in: req.session.logged_in});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });

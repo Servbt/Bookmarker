@@ -5,7 +5,7 @@
             var pID = $(this).find("p").text();
             $.post("http://localhost:3000/dashboard/singleBook", { "book": pID },
                 function (data, status) {
-                    // Use the response data (HTML) to replace the current document
+                    // // Use the response data (HTML) to replace the current document
                     document.open();
                     document.write(data);
                     document.close();
