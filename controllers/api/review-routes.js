@@ -65,7 +65,7 @@ router.get("/all", withAuth, async (req, res) => {
       test.push(review.book)
     });
 
-    res.render('reviews.ejs', { reviews: reviews });
+    res.render('reviews.ejs', { reviews: reviews , logged_in: req.session.user_id});
     // res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
