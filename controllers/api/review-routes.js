@@ -109,11 +109,11 @@ router.post("/user-all", async (req, res) => {
   }
 });
 
-// gets all reviews for a single book
-router.post("/recent-reviews", withAuth, async (req, res) => {
+// gets all reviews for a single book ***MIGHT BE REDUNDANT***
+router.post("/book-reviews", withAuth, async (req, res) => {
   let bookfound = req.body.book
   try {
-    const reviews = await Review.findAndCountAll({ where: { book: bookfound } });
+    const reviews = await Review.findAll({ where: { book: bookfound } });
     res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);

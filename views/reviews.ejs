@@ -1,34 +1,42 @@
 <%- include("./components/navbar.ejs")%>
-<body>
+
+    <body>
         <h1 class="test">My Reviews Page</h1>
         <!-- Log out button -->
         <form action="/api/user/logout" method="POST">
             <button type="submit" class="btn btn-primary logout">Log Out</button>
         </form>
 
-        <!-- recommended books -->
+        <!-- books user has reviewed-->
         <% if (locals.reviews) { %>
             <!-- set an number for the func to go through array -->
-            <% let numb = -1 %>
-            <% reviews.forEach(review=> { %>
-            <% numb++ %>
-            <div>
-                <h1 class="book-title">
-                    <%= bookData[numb].volumeInfo.title %>
-                    <p class="visually-hidden book-ID">
-                        <%= review.book %>
-                    </p>
-                </h1>
-                <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>" class="book-image" alt="book cover">
-                    
-                </img >
-            </div>
+            <% let numb=-1 %>
+                <% reviews.forEach(review=> { %>
+                    <% numb++ %>
+                        <div>
+                            <h1 class="book-title">
+                                <%= bookData[numb].volumeInfo.title %>
+                                    <!-- <form class="mark-box" action="/api/review/find" method="POST"> -->
+                                        <p class="visually-hidden book-ID"><%= review.book %></p>
+                                    <!-- </form> -->
 
-                <% }); %>
-                    <% } %>
+                            </h1>
+                            <!-- takes user back to mark -->
+
+                            <p class="review-content">
+                                <%= review.content %>
+                            </p>
+                            <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>" class="book-image"
+                                alt="book cover">
+
+                            </img>
+                        </div>
+
+                        <% }); %>
+                            <% } %>
 
 
-                    <%- include("../utils/bookIDfind.ejs") %>
+                                <%- include("../utils/bookIDfind.ejs") %>
 
     </body>
 

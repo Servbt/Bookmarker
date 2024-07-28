@@ -49,14 +49,20 @@ router.post('/search', async (req, res) => {
   }
 });
 
-// route for single result book page
+// route for single result book page    
 router.post('/singleBook', async (req, res) => {
   try {
     let bookID = req.body.book;
-    // console.log("THIS IS THE ID OF THE BOOK" + bookID);
+
+    console.log(bookID);
+    const reviews = await Review.findAll(
+      { where: 
+        { book: bookID } }
+    );
+
+    console.log(reviews);
 
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
-
     // getting all data for one book
     const bookData = response.data;
 
