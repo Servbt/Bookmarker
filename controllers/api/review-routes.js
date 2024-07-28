@@ -27,7 +27,7 @@ router.post("/", withAuth, async (req, res) => {
     // console.log("THIS IS A REVIEWW!!!!!" + newReview);
     // console.log("THIS IS A CONTENNTTT!!!!!" + content);
     // console.log("THIS IS A MARKKKK!!!!!" + mark_read);
-    res.status(200).json(newReview);
+    // res.status(200).json(newReview);
   } catch (err) {
     res.status(500).json(err);
   }
