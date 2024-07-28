@@ -1,6 +1,6 @@
-
 const router = require("express").Router();
 const { Review, User } = require("../../models");
+const axios = require('axios').default;
 const withAuth = require("../../utils/auth");
 
 // makes and saves a review into the data base
@@ -9,7 +9,7 @@ router.post("/", withAuth, async (req, res) => {
     let book = req.body.book;
     let content = req.body.content;
     let mark_read = req.body.btncheck1;
-    
+
     if (mark_read == undefined) {
       mark_read = false;
     } else {
@@ -58,14 +58,29 @@ router.get("/all", withAuth, async (req, res) => {
     const reviews = await Review.findAll(
       { where: { user_id: req.session.user_id } }
     );
-    // console.log(reviews);
 
     let test = [];
     reviews.forEach(review => {
       test.push(review.book)
     });
 
-    res.render('reviews.ejs', { reviews: reviews , logged_in: req.session.user_id});
+    console.log("THIS IS THE FIRST BOOK!" + test[0]);
+
+    const requests = test.map(book => {
+      return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
+    });
+
+    const results = await Promise.all(requests);
+
+    const responseData = results.map(result => result.data);
+
+    // console.log(responseData);
+    // res.json(responseData);
+  res.render('reviews.ejs',
+      { reviews: reviews, 
+        logged_in: req.session.user_id,
+        bookData: responseData
+      });
     // res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);

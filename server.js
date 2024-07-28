@@ -4,6 +4,7 @@ const routes = require('./controllers/index.js');
 const session = require('express-session');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -26,7 +27,7 @@ app.set('trust proxy', 1);
 app.use(session(sess));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
