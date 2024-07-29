@@ -15,28 +15,28 @@
             </p>
             <div>
                 <!-- POST Request made for review route serverside -->
-                <h3>Mark Book?</h3>
-                <form class="text-center pt-2 form-body border border-5 rounded-5 mark-box" action="/api/review"
-                    method="POST">
-
-                    <!-- Book ID captured for google api used serverside -->
-                    <label for="book" class="form-label cust-label pt-1 visually-hidden">book</label>
-                    <input class="visually-hidden" value="<%= singleBook.id%>" name="book"></input>
-
-                    <!-- Text For Review content -->
-                    <label for="content" class="form-label cust-label pt-1">Content</label>
-                    <textarea type="text" class="form-control border border-1 rounded-0 myText"
-                        id="exampleFormControlTextarea1" rows="10 "
-                        placeholder="this field is not required to mark book read or unread" name="content"></textarea>
-                    <!-- Submit button for text content of review -->
-                    <input class="btn btn-primary btn-lg my-3 create-button " type="submit" value="Make a Mark"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <!-- boolean checkbox -->
-                    <div class="btn-group post-review" role="group" aria-label="Basic checkbox toggle button group">
-                        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" name="btncheck1">
-                        <label class="btn btn-outline-primary post-review" for="btncheck1">mark read</label>
-                    </div>
-                </form>
+                <% if (locals.reviewData) { %>
+                    <h3>Edit Mark?</h3>
+                    <form class="text-center pt-2 form-body border border-5 rounded-5 mark-box" action="/api/review/edit-review"
+                        method="POST">
+                        <!-- Book ID captured for google api used serverside -->
+                        <label for="book" class="form-label cust-label pt-1 visually-hidden">book</label>
+                        <input class="visually-hidden" value="<%= singleBook.id%>" name="book"></input>
+                        <!-- Text For Review content Filled already with previous review content -->
+                        <label for="content" class="form-label cust-label pt-1">Content</label>
+                        <textarea type="text" class="form-control border border-1 rounded-0 myText"
+                            id="exampleFormControlTextarea1" rows="10 "
+                            placeholder="this field is not required to mark book read or unread" name="content"><%= reviewData.content %></textarea>
+                        <!-- Submit button for text content of review -->
+                        <input class="btn btn-primary btn-lg my-3 create-button " type="submit" value="Make a Mark"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <!-- boolean checkbox -->
+                        <div class="btn-group post-review" role="group" aria-label="Basic checkbox toggle button group">
+                            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" name="btncheck1">
+                            <label class="btn btn-outline-primary post-review" for="btncheck1">mark read</label>
+                        </div>
+                    </form>
+                    <% } %>
 
             </div>
             <!-- list all user reviews and link them with given ids -->
@@ -66,7 +66,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Mark Successfully Made!
+                                            Mark Successfully Updated!
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"

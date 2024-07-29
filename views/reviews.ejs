@@ -33,8 +33,13 @@
                             </p>
                             <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>" class="book-image"
                                 alt="book cover">
-
                             </img>
+                            <% if (!locals.userData) { %>
+                            <a class="mark-edit" href="/api/review/<%=review.id%>">
+                                Edit This Mark?
+                            </a>
+                            <% } %>
+
                         </div>
 
                         <% }); %>

@@ -126,17 +126,47 @@ router.get("/all-reviews", async (req, res) => {
   }
 });
 
+// Gets client to Review Mark Page, goes to editBook.ejs
+router.get('/:id', async (req, res) => {
+  const review = await Review.findAll(
+    { where: { id: req.params.id } }
+);
+    // target id from book clicked (post request made from bookIDfind.js) 
+    let bookID = review[0].book;
+    const reviews = await Review.findAll({ where:{ book: bookID } });
+    // getting all data for one book
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
+    const bookData = response.data;
+
+    res.render('editBook.ejs', { 
+      singleBook: bookData ,
+       logged_in: req.session.logged_in,
+       reviews: reviews,
+       reviewData: review[0]
+      });
+
+});
+
+
 // updates a review's content or mark
 router.post("/edit-review", withAuth, async (req, res) => {
   // grabs data from edit form
   let bookfound = req.body.book;
   let newReview = req.body.content;
-  // let newMark = req.body.mark_read;
+  let newMark = req.body.btncheck1;
+
+  if (newMark == undefined) {
+    newMark = false;
+  } else {
+    newMark = true;
+  };
+
+
   try {
     // updates the review by finding it with the data we got from the edit form
     const review = await Review.update({ content: newReview, mark_read: newMark },
       { where: { book: bookfound, user_id: req.session.user_id } });
-    res.status(200).json(review);
+    // res.status(200).json(review);
   } catch (err) {
     res.status(500).json(err);
   }
