@@ -173,13 +173,14 @@ router.post("/edit-review", withAuth, async (req, res) => {
 });
 
 // route for deleting a review from database
-router.delete("/delete-review", withAuth, async (req, res) => {
-  let bookfound = req.body.book;
+router.get("/delete-review/:id", withAuth, async (req, res) => {
+  let bookfound = req.params.id;
   try {
     const reviews = await Review.destroy(
-      { where: { book: bookfound, user_id: req.session.user_id } }
+      { where: { id: bookfound, user_id: req.session.user_id } }
     );
-    res.status(200).json(reviews);
+    // res.status(200).json(bookfound);
+    res.redirect("/api/review/all");
   } catch (err) {
     res.status(500).json(err);
   }
