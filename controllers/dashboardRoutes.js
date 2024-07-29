@@ -52,23 +52,24 @@ router.post('/search', async (req, res) => {
 // route for single result book page    
 router.post('/singleBook', async (req, res) => {
   try {
+    // target id from book clicked (post request made from bookIDfind.js) 
     let bookID = req.body.book;
-
+    // find all reviews for book that was clicked on
     console.log(bookID);
-    const reviews = await Review.findAll(
-      { where: 
-        { book: bookID } }
-    );
+    const reviews = await Review.findAll({ where:{ book: bookID } });
+    // console.log(reviews);
 
-    console.log(reviews);
-
-    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
     // getting all data for one book
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
     const bookData = response.data;
 
 
     // console.log(bookData);
-    res.render('singleBook.ejs', { singleBook: bookData , logged_in: req.session.logged_in});
+    res.render('singleBook.ejs', { 
+      singleBook: bookData ,
+       logged_in: req.session.logged_in,
+       reviews: reviews
+      });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
