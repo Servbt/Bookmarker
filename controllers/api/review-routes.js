@@ -82,6 +82,38 @@ router.get("/all", withAuth, async (req, res) => {
   }
 });
 
+// Gets all Mark data for client ()
+router.get("/all-marks", withAuth, async (req, res) => {
+  try {
+
+    const reviews = await Review.findAll(
+      { where: { user_id: req.session.user_id } }
+    );
+    // make an array with just book IDs
+    let test = [];
+    reviews.forEach(review => {
+      test.push(review.book)
+    });
+
+    // make an array filled with book info from those arrays
+    const requests = test.map(book => {
+      return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
+    });
+
+    const results = await Promise.all(requests);
+    const responseData = results.map(result => result.data);
+
+  res.render('marks.ejs',
+      { reviews: reviews, 
+        logged_in: req.session.user_id,
+        bookData: responseData
+      });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 // Gets all review data for a certain user
 router.post("/user-all", async (req, res) => {
   let userFound = req.body.name

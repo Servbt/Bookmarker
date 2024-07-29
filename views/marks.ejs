@@ -21,7 +21,7 @@
                             <% reviews.forEach(review=> { %>
                                 <% numb++ %>
                                 <!-- Checks to see if there is a review present for it to show data -->
-                            <% if (review.content) { %>
+                            <% if (!review.content) { %>
                                     <div>
                                         <h1 class="book-title">
                                             <%= bookData[numb].volumeInfo.title %>
@@ -32,11 +32,6 @@
                                                 <!-- </form> -->
 
                                         </h1>
-                                        <!-- takes user back to mark -->
-
-                                        <p class="review-content">
-                                            <%= review.content %>
-                                        </p>
                                         <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>"
                                             class="book-image" alt="book cover">
                                         </img>
