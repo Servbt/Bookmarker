@@ -58,30 +58,25 @@ router.get("/all", withAuth, async (req, res) => {
     const reviews = await Review.findAll(
       { where: { user_id: req.session.user_id } }
     );
-
+    // make an array with just book IDs
     let test = [];
     reviews.forEach(review => {
       test.push(review.book)
     });
 
-    console.log("THIS IS THE FIRST BOOK!" + test[0]);
-
+    // make an array filled with book info from those arrays
     const requests = test.map(book => {
       return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
     });
 
     const results = await Promise.all(requests);
-
     const responseData = results.map(result => result.data);
 
-    // console.log(responseData);
-    // res.json(responseData);
   res.render('reviews.ejs',
       { reviews: reviews, 
         logged_in: req.session.user_id,
         bookData: responseData
       });
-    // res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
   }

@@ -1,7 +1,12 @@
 <%- include("./components/navbar.ejs")%>
 
     <body>
+        <!-- checks if reviews are clients or another user's -->
+        <% if (!locals.userData) { %>
         <h1 class="test">My Reviews Page</h1>
+        <% } else {%>
+        <h1 class="user-name test"><%= userData.name %>'s Review Page</h1>
+            <% } %>
         <!-- Log out button -->
         <form action="/api/user/logout" method="POST">
             <button type="submit" class="btn btn-primary logout">Log Out</button>
