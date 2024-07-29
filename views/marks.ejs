@@ -3,10 +3,10 @@
     <body>
         <!-- checks if reviews are clients or another user's -->
         <% if (!locals.userData) { %>
-            <h1 class="test">My Reviews Page</h1>
+            <h1 class="test">My Marks</h1>
             <% } else {%>
                 <h1 class="user-name test">
-                    <%= userData.name %>'s Review Page
+                    <%= userData.name %>'s Mark Page
                 </h1>
                 <% } %>
                     <!-- Log out button -->

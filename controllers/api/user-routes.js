@@ -139,6 +139,53 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// Get single user by id
+router.get('/user-marks/:id', async (req, res) => {
+    try {
+        
+        // get user from singleBook.ejs reviews portion
+        const userData = await User.findByPk(req.params.id, {
+            attributes: {
+                exclude: ['password'],
+            },
+        });
+
+        // find all reviews from given user data   
+        const reviews = await Review.findAll(
+            { where: { user_id: userData.id } }
+        );
+        // make an array with just book IDs
+        let test = [];
+        reviews.forEach(review => {
+            test.push(review.book)
+        });
+
+        // make an array filled with book info from those arrays
+        const requests = test.map(book => {
+            return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
+        });
+        // same functionality from review-routes.js
+        const results = await Promise.all(requests);
+        const responseData = results.map(result => result.data);
+
+
+        if (!userData) {
+            res.status(404).json({ message: 'No user found with this id' });
+            return;
+        };
+
+        res.render('marks.ejs',
+            {
+                reviews: reviews,
+                logged_in: req.session.user_id,
+                bookData: responseData,
+                userData: userData
+            });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 
 
 module.exports = router;

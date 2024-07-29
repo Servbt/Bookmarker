@@ -8,6 +8,10 @@
                 <h1 class="user-name test">
                     <%= userData.name %>'s Review Page
                 </h1>
+                <a class="user-marks" href="/api/user/user-marks/<%= userData.id %>">
+                    go to <%= userData.name %>'s Marks?
+                    <%= userData.id %>
+                </a>
                 <% } %>
                     <!-- Log out button -->
                     <form action="/api/user/logout" method="POST">
