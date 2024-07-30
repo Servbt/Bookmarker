@@ -39,6 +39,7 @@
                 </form>
 
             </div>
+            <% } %>
             <!-- list all user reviews and link them with given ids -->
             <% if (locals.reviews) { %>
                 <div class="user-review">
@@ -51,7 +52,6 @@
                         <% }); %>
                 </div>
 
-                <% } %>
                     <% } %>
 
                         <% if (locals.logged_in) { %>

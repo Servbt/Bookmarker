@@ -55,7 +55,7 @@ router.post('/singleBook', async (req, res) => {
     // target id from book clicked (post request made from bookIDfind.js) 
     let bookID = req.body.book;
     // find all reviews for book that was clicked on
-    console.log(bookID);
+    // console.log(bookID);
     const reviews = await Review.findAll({ where:{ book: bookID } });
     // console.log(reviews);
 
@@ -64,7 +64,7 @@ router.post('/singleBook', async (req, res) => {
     const bookData = response.data;
 
 
-    // console.log(bookData);
+    // console.log(reviews);
     res.render('singleBook.ejs', { 
       singleBook: bookData ,
        logged_in: req.session.logged_in,

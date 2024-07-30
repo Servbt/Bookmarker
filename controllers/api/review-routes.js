@@ -73,7 +73,7 @@ router.get("/all", withAuth, async (req, res) => {
     const responseData = results.map(result => result.data);
 
   res.render('reviews.ejs',
-      { reviews: reviews, 
+      { reviews: reviews,
         logged_in: req.session.user_id,
         bookData: responseData
       });
@@ -92,9 +92,8 @@ router.get("/all-marks", withAuth, async (req, res) => {
     // make an array with just book IDs
     let test = [];
     reviews.forEach(review => {
-      test.push(review.book)
+      test.push(review.book);
     });
-
     // make an array filled with book info from those arrays
     const requests = test.map(book => {
       return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
