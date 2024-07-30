@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const axios = require('axios').default;
 
+const { Sequelize } = require('sequelize');
 const { Book, User, Review, Tag } = require('../models');
 
 // home page, calling google api for a sample selection of books
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
     });
 
     // console.log(books[0].volumeInfo.title);
-    res.render('landing.ejs', { bookList: books,  });
+    res.render('landing.ejs', { bookList: books, });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -54,21 +55,37 @@ router.get('/home', async (req, res) => {
       attributes: { exclude: ['password'] },
     });
 
-    let books = [];
-    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
-    
-    // getting each book
-    const bookArr = response.data.items;
-    bookArr.forEach(item => {
-      books.push(item);
+    const reviews = await Review.findAll({
+      attributes: {
+        include: [
+          [Sequelize.fn('COUNT', Sequelize.col('review.id')), 'reviewCount']
+        ]
+      },
+      include: [{
+        model: User,
+        attributes: ['id']
+      }],
+      group: ['review.id', 'user.id'],
+      order: [[Sequelize.fn('COUNT', Sequelize.col('review.user_id')), 'DESC']]
     });
 
-    const user = userData.get({ plain: true });
-    res.render('home.ejs', {
-      user,
-      logged_in: req.session.logged_in,
-      bookList: books
-    });
+    res.json(reviews)
+
+    // let books = [];
+    // const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
+
+    // // getting each book
+    // const bookArr = response.data.items;
+    // bookArr.forEach(item => {
+    //   books.push(item);
+    // });
+
+    // const user = userData.get({ plain: true });
+    // res.render('home.ejs', {
+    //   user,
+    //   logged_in: req.session.logged_in,
+    //   bookList: books
+    // });
 
   } catch (err) {
     res.status(500).json(err);

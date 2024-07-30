@@ -3,10 +3,10 @@
     <body>
         <!-- checks if reviews are clients or another user's -->
         <% if (!locals.userData) { %>
-            <h1 class="test">My Reviews Page</h1>
+            <h1 class="test">My Reviews</h1>
             <% } else {%>
                 <h1 class="user-name test">
-                    <%= userData.name %>'s Review Page
+                    <%= userData.name %>'s Reviews
                 </h1>
                 <a class="user-marks" href="/api/user/user-marks/<%= userData.id %>">
                     go to <%= userData.name %>'s Marks?
