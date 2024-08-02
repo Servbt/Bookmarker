@@ -1,6 +1,9 @@
 <body>
 
   <h1>SingUp Page</h1>
+  <% if (locals.message) { %>
+    <h3 class="bg-warning"><%= message %></h3>
+    <% } %>
   <form action="api/user/" method="POST">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
