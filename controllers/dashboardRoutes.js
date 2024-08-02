@@ -2,6 +2,9 @@ const router = require('express').Router();
 const { Book, User, Review, Tag } = require('../models');
 const axios = require('axios').default;
 const withAuth = require('../utils/auth');
+const myKey = 'AIzaSyAWkq6glcnzeDFA_dtgJORBns4mhh1K9Vk';
+
+
 
 // render dashboard page
 router.get('/', withAuth, async (req, res) => {
@@ -33,7 +36,7 @@ router.post('/search', async (req, res) => {
     console.log(booksrch);
     let searchList = [];
 
-    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${booksrch}`);
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${booksrch}&key=${myKey}`);
 
     // getting each book
     const bookArr = response.data.items;
@@ -60,7 +63,7 @@ router.post('/singleBook', async (req, res) => {
     // console.log(reviews);
 
     // getting all data for one book
-    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}?key=${myKey}`);
     const bookData = response.data;
 
 

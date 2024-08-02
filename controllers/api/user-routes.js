@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Review, Book } = require('../../models');
 const axios = require('axios').default;
+const myKey = 'AIzaSyAWkq6glcnzeDFA_dtgJORBns4mhh1K9Vk';
 
 
 
@@ -115,7 +116,7 @@ router.get('/:id', async (req, res) => {
 
         // make an array filled with book info from those arrays
         const requests = test.map(book => {
-            return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
+            return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}?key=${myKey}`)
         });
         // same functionality from review-routes.js
         const results = await Promise.all(requests);
@@ -162,7 +163,7 @@ router.get('/user-marks/:id', async (req, res) => {
 
         // make an array filled with book info from those arrays
         const requests = test.map(book => {
-            return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
+            return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}?key=${myKey}`)
         });
         // same functionality from review-routes.js
         const results = await Promise.all(requests);

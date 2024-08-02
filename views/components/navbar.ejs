@@ -12,14 +12,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
-<% if (locals.logged_in)  { %>
 <body>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand">Navbar</a>
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Bookmarker</a>
+      <% if (locals.logged_in)  { %>
+      <a class="nav-link active" aria-current="page" href="/home">Home</a>
           <a class="nav-link" href="/api/review/all">All My Reviews</a>
           <a class="nav-link" href="/api/review/all-marks">All My Marks</a>
+          <% } %>
           <!-- <a class="nav-link" href="/api/review/all-reviews">All Reviews</a> -->
           <!-- <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Features</a>
@@ -36,4 +37,3 @@
         </div>
       </nav>
 </body>
-<% } %>

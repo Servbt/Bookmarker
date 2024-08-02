@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Review, User } = require("../../models");
 const axios = require('axios').default;
 const withAuth = require("../../utils/auth");
+const myKey = 'AIzaSyAWkq6glcnzeDFA_dtgJORBns4mhh1K9Vk';
 
 // makes and saves a review into the data base
 router.post("/", withAuth, async (req, res) => {
@@ -66,7 +67,7 @@ router.get("/all", withAuth, async (req, res) => {
 
     // make an array filled with book info from those arrays
     const requests = test.map(book => {
-      return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
+      return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}?key=${myKey}`)
     });
 
     const results = await Promise.all(requests);
@@ -96,7 +97,7 @@ router.get("/all-marks", withAuth, async (req, res) => {
     });
     // make an array filled with book info from those arrays
     const requests = test.map(book => {
-      return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`)
+      return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}?key=${myKey}`)
     });
 
     const results = await Promise.all(requests);
@@ -166,7 +167,7 @@ router.get('/:id', async (req, res) => {
     let bookID = review[0].book;
     const reviews = await Review.findAll({ where:{ book: bookID } });
     // getting all data for one book
-    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}`);
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}?key=${myKey}`);
     const bookData = response.data;
 
     res.render('editBook.ejs', { 

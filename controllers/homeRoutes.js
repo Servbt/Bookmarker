@@ -3,13 +3,15 @@ const axios = require('axios').default;
 
 const { Sequelize } = require('sequelize');
 const { Book, User, Review, Tag } = require('../models');
+const myKey = 'AIzaSyAWkq6glcnzeDFA_dtgJORBns4mhh1K9Vk';
+
 
 // home page, calling google api for a sample selection of books
 router.get('/', async (req, res) => {
   try {
     let books = [];
 
-    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry Pottter&key=${myKey}`);
 
     // getting each book
     const bookArr = response.data.items;
@@ -55,37 +57,37 @@ router.get('/home', async (req, res) => {
       attributes: { exclude: ['password'] },
     });
 
-    const reviews = await Review.findAll({
-      attributes: {
-        include: [
-          [Sequelize.fn('COUNT', Sequelize.col('review.id')), 'reviewCount']
-        ]
-      },
-      include: [{
-        model: User,
-        attributes: ['id']
-      }],
-      group: ['review.id', 'user.id'],
-      order: [[Sequelize.fn('COUNT', Sequelize.col('review.user_id')), 'DESC']]
+    const recentReviews = await Review.findAll({
+      order: [
+        ["date_created", "DESC"]
+      ]
     });
 
-    res.json(reviews)
+    
+    let randReviews = [];
+    
+    recentReviews.forEach(review => {
+      let rand = Math.random();
+      let randomArray = Math.floor(rand * recentReviews.length);
+      randReviews.push(recentReviews[randomArray]);
+    });
+    // res.json(randReviews);
 
-    // let books = [];
-    // const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry potter and the `);
+    let books = [];
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=harry Pottter&key=${myKey}`);
 
-    // // getting each book
-    // const bookArr = response.data.items;
-    // bookArr.forEach(item => {
-    //   books.push(item);
-    // });
+    // getting each book
+    const bookArr = response.data.items;
+    bookArr.forEach(item => {
+      books.push(item);
+    });
 
-    // const user = userData.get({ plain: true });
-    // res.render('home.ejs', {
-    //   user,
-    //   logged_in: req.session.logged_in,
-    //   bookList: books
-    // });
+    const user = userData.get({ plain: true });
+    res.render('home.ejs', {
+      user,
+      logged_in: req.session.logged_in,
+      bookList: books
+    });
 
   } catch (err) {
     res.status(500).json(err);
