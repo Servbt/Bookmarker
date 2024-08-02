@@ -48,18 +48,16 @@ router.post('/login', async (req, res) => {
         });
 
         if (!userData) {
-            res.status(400).json({
-                message: 'Incorrect email or password, please try again',
-            });
+            const loginNeed = true;
+            res.render('log-sign-page.ejs', { needLogin: loginNeed, message: 'Incorrect email or password, please try again' });
             return;
         }
 
         const validPassword = await userData.checkPassword(req.body.password);
 
         if (!validPassword) {
-            res.status(400).json({
-                message: 'Incorrect email or password, please try again',
-            });
+            const loginNeed = true;
+            res.render('log-sign-page.ejs', { needLogin: loginNeed, message: 'Incorrect email or password, please try again' });
             return;
         }
 
@@ -143,7 +141,7 @@ router.get('/:id', async (req, res) => {
 // Get single user by id
 router.get('/user-marks/:id', async (req, res) => {
     try {
-        
+
         // get user from singleBook.ejs reviews portion
         const userData = await User.findByPk(req.params.id, {
             attributes: {
