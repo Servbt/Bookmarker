@@ -3,16 +3,12 @@
     <body>
         <!-- checks if reviews are clients or another user's -->
         <% if (!locals.userData) { %>
-            <h1 class="test">My Marks</h1>
+            <h1 class="my-hero">My Marks</h1>
             <% } else {%>
                 <h1 class="user-name test">
                     <%= userData.name %>'s Marks
                 </h1>
                 <% } %>
-                    <!-- Log out button -->
-                    <form action="/api/user/logout" method="POST">
-                        <button type="submit" class="btn btn-primary logout">Log Out</button>
-                    </form>
 
                     <!-- books user has reviewed-->
                     <% if (locals.reviews) { %>
@@ -20,35 +16,43 @@
                         <% let numb=-1 %>
                             <% reviews.forEach(review=> { %>
                                 <% numb++ %>
-                                <!-- Checks to see if there is a review present for it to show data -->
-                            <% if (!review.content) { %>
-                                    <div>
-                                        <h1 class="book-title">
-                                            <%= bookData[numb].volumeInfo.title %>
-                                                <!-- <form class="mark-box" action="/api/review/find" method="POST"> -->
-                                                <p class="visually-hidden book-ID"><%= review.book %></p>
-                                                <!-- </form> -->
+                                    <!-- Checks to see if there is a review present for it to show data -->
+                                    <% if (!review.content) { %>
+                                        <div>
+                                            <h1 class="book-title">
+                                                <%= bookData[numb].volumeInfo.title %>
+                                                    <!-- <form class="mark-box" action="/api/review/find" method="POST"> -->
+                                                    <p class="visually-hidden book-ID">
+                                                        <%= review.book %>
+                                                    </p>
+                                                    <!-- </form> -->
 
-                                        </h1>
-                                        <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>"
-                                            class="book-image" alt="book cover">
-                                        </img>
-                                        <br>
-                                        <% if (!locals.userData) { %>
-                                            <a class="mark-edit" href="/api/review/<%=review.id%>">
-                                                Edit This Mark?
-                                            </a>
+                                            </h1>
+                                            <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>"
+                                                class="book-image" alt="book cover">
+                                            </img>
                                             <br>
-                                            <a class="mark-edit" href="/api/review/delete-review/<%=review.id%>">
-                                                Delete This Mark?
-                                            </a>
+                                            <% if (!locals.userData) { %>
+                                                <a class="mark-edit" href="/api/review/<%=review.id%>">
+                                                    Edit This Mark?
+                                                </a>
+                                                <br>
+                                                <a class="mark-edit" href="/api/review/delete-review/<%=review.id%>">
+                                                    Delete This Mark?
+                                                </a>
 
-                                    </div>
+                                        </div>
                                         <% } %>
                                             <% } %>
                                                 <% }); %>
                                                     <% } %>
                                                         <%- include("../utils/bookIDfind.ejs") %>
+                                                            <!-- Log out button -->
+                                                            <form action="/api/user/logout" method="POST">
+                                                                <button type="submit" class="btn btn-primary logout">Log
+                                                                    Out</button>
+                                                            </form>
+
 
     </body>
 

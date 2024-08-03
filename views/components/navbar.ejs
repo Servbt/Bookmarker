@@ -13,14 +13,16 @@
 
 
 <body>
-  <nav class="navbar bg-body-tertiary">
+  <nav class="navbar bg-body-tertiary ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">Bookmarker</a>
       <% if (locals.logged_in)  { %>
-      <a class="nav-link active" aria-current="page" href="/home">Home</a>
-          <a class="nav-link" href="/api/review/all">All My Reviews</a>
-          <a class="nav-link" href="/api/review/all-marks">All My Marks</a>
+        <a class="navbar-brand my-head col col-6" href="/home">Bookmarker</a>
+          <a class="nav-link my-nav col col-sm" href="/api/review/all">All My Reviews</a>
+          <a class="nav-link my-nav col col-sm" href="/api/review/all-marks">All My Marks</a>
+          <% } else { %>
+        <a class="navbar-brand my-head col col-sm-5" href="/">Bookmarker</a>
           <% } %>
+
           <!-- <a class="nav-link" href="/api/review/all-reviews">All Reviews</a> -->
           <!-- <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Features</a>
@@ -30,7 +32,7 @@
           <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Features</a>
            <a class="nav-link" href="#">Features</a> -->
-          <form class="d-flex" action="/dashboard/search" role="search" method="POST" >
+          <form class="d-flex col col-sm-2 me-4" action="/dashboard/search" role="search" method="POST" >
             <input class="form-control me-2" type="text" name="book" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" for="book" type="submit">Search</button>
           </form>
