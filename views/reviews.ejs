@@ -7,7 +7,7 @@
                 <% if (!locals.userData) { %>
                     <h1 class="my-hero">My Reviews</h1>
                     <% } else {%>
-                        <h1 class="user-name test">
+                        <h1 class="user-name my-hero">
                             <%= userData.name %>'s Reviews
                         </h1>
                         <a class="user-marks" href="/api/user/user-marks/<%= userData.id %>">
@@ -26,7 +26,7 @@
                             <% numb++ %>
                                 <!-- Checks to see if there is a review present for it to show data -->
                                 <% if (review.content) { %>
-                                    <div class="col m-3 border border-2 p-4 rounded-3 text-center">
+                                    <div class="col col-sm-auto col-lg-3  m-3 border border-2 p-4 rounded-3 text-center">
                                         <h1 class="book-title book-card">
                                             <%= bookData[numb].volumeInfo.title %>
                                                 <!-- <form class="mark-box" action="/api/review/find" method="POST"> -->

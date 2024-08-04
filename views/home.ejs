@@ -7,11 +7,13 @@
                 <h4 class="under-hero">Based On User Reviews</h4>
 
             </div>
+            <div class="text-center">
                 <!-- recommended books -->
                 <% if (locals.bookList) { %>
                     <%- include("./components/recommended.ejs")%>
-                        <% } %>
-                            <%- include("../utils/bookIDfind.ejs") %>
+                    <% } %>
+                    <%- include("../utils/bookIDfind.ejs") %>
+                </div>
         </div>
 
     </body>

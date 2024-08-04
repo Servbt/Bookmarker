@@ -2,7 +2,7 @@
     <hr class="custom-hr">
     <div class="row">
         <% bookList.forEach(book=> { %>
-            <div class="col col-sm-4 p-3 book-card">
+            <div class="col rounded-2 col-sm-4 p-3 book-card">
                 <p class="book-title"><%= book.volumeInfo.title %></p>
                 <p class="visually-hidden book-id"><%= book.id %></p>
                 <img class="book-image  justify-content-end" src="<%= book.volumeInfo.imageLinks.thumbnail %>">
