@@ -73,3 +73,11 @@
 .read :hover {
     text-decoration: underline;
 }
+
+
+/* reviews.ejs */
+
+.review-card :hover {
+
+    text-decoration: underline;
+}
