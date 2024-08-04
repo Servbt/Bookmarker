@@ -2,29 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="/styles/styling.css">
-    <title>BookMarker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/styles/styling.css">
+  <title>BookMarker</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
 <body>
   <nav class="navbar bg-body-tertiary ">
-    <div class="container-fluid">
-      <% if (locals.logged_in)  { %>
-        <a class="navbar-brand my-head col col-6" href="/home">Bookmarker</a>
-          <a class="nav-link my-nav col col-sm" href="/api/review/all">All My Reviews</a>
-          <a class="nav-link my-nav col col-sm" href="/api/review/all-marks">All My Marks</a>
-          <% } else { %>
-        <a class="navbar-brand my-head col col-sm-5" href="/">Bookmarker</a>
+    <div class="container">
+      <% if (locals.logged_in) { %>
+        <a class="navbar-brand my-head col col-6 " href="/home">Bookmarker</a>
+        <a class="nav-link my-nav col col-sm" href="/api/review/all">All My Reviews</a>
+        <a class="nav-link my-nav col col-sm" href="/api/review/all-marks">All My Marks</a>
+        <% } else { %>
+          <a class="navbar-brand my-head col col-sm-5 " href="/">Bookmarker</a>
           <% } %>
 
-          <!-- <a class="nav-link" href="/api/review/all-reviews">All Reviews</a> -->
-          <!-- <a class="nav-link" href="#">Features</a>
+            <!-- <a class="nav-link" href="/api/review/all-reviews">All Reviews</a> -->
+            <!-- <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Features</a>
@@ -32,10 +32,10 @@
           <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Features</a>
            <a class="nav-link" href="#">Features</a> -->
-          <form class="d-flex col col-sm-2 me-4" action="/dashboard/search" role="search" method="POST" >
-            <input class="form-control me-2" type="text" name="book" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" for="book" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
+            <form class="d-flex col col-sm-auto me-4" action="/dashboard/search" role="search" method="POST">
+              <input class="form-control me-2" type="text" name="book" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" for="book" type="submit">Search</button>
+            </form>
+    </div>
+  </nav>
 </body>

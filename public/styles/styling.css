@@ -47,3 +47,14 @@
 .book-card {
     cursor: pointer;
 }
+
+.book-card :hover {
+    text-decoration: underline;
+}
+
+
+/* Landing.ejs */
+
+.btn :hover {
+    color: green;
+}
