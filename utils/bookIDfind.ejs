@@ -1,8 +1,8 @@
 <script>
     // POST request made for google api for finding single books with given ID
     $(function () {
-        $(document).on("click", ".book-title", function (e) {
-            var pID = $(this).find("p").text();
+        $(document).on("click", ".book-card", function (e) {
+            var pID = $(this).find(".book-id").text();
             $.post("http://localhost:3000/dashboard/singleBook", { "book": pID },
                 function (data, status) {
                     // // Use the response data (HTML) to replace the current document

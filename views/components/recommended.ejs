@@ -1,10 +1,14 @@
-<body>
-    <h1>Recommended Series:</h1>
+<body class="">
+    <hr class="custom-hr">
+    <div class="row">
+        <% bookList.forEach(book=> { %>
+            <div class="col col-sm-4 p-3 book-card">
+                <p class="book-title"><%= book.volumeInfo.title %></p>
+                <p class="visually-hidden book-id"><%= book.id %></p>
+                <img class="book-image  justify-content-end" src="<%= book.volumeInfo.imageLinks.thumbnail %>">
+                <p class="book-author"> by:<b><%= book.volumeInfo.authors[0] %></b></p>
+            </div>
+            <% }); %>
 
-    <% bookList.forEach(book=> { %>
-        <h2 class="book-title">
-            <%= book.volumeInfo.title %>
-                <p class="visually-hidden"><%= book.id %></p>
-        </h2>
-        <% }); %>
+    </div>
 </body>

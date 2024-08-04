@@ -15,6 +15,35 @@
 /* Universal Styles */
 
 .my-hero {
-    font-size: 60px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 55px;
+    color: orangered;
     margin-top: 1%;
+}
+
+.under-hero {
+    font-family: inherit;
+}
+
+.custom-hr {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+
+/* recommended.ejs styles  */
+
+.book-title {
+    font-family: inherit;
+    font-size: 18px;
+}
+
+.book-author {
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.book-card {
+    cursor: pointer;
 }
