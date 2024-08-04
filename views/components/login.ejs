@@ -1,8 +1,14 @@
 <body>
+<div class="container p-5 mt-5 border">
 
-  <h1>Login Page</h1>
+  <div class="row">
+    <h1 class="my-hero">Login Page</h1>
+
+  </div>
   <% if (locals.message) { %>
-    <h3 class="bg-warning"><%= message %></h3>
+    <h3 class="bg-warning">
+      <%= message %>
+    </h3>
     <% } %>
       <form action="/api/user/login" method="POST">
         <div class="mb-3">
@@ -14,9 +20,11 @@
           <label for="password" class="form-label">Password</label>
           <input type="password" name="password" class="form-control" id="exampleInputPassword1">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-outline-success">Submit</button>
       </form>
-      <a href="/signup">Signup</a>
+      <p class="pt-1">Don't Have an account?  <a href="/signup">Signup!</a></p>
+
+</div>
 
 
 </body>
