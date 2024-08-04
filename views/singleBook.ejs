@@ -1,81 +1,113 @@
 <%- include("./components/navbar.ejs")%>
 
     <body>
-        <!-- Display Data from server side on page -->
-        <h1 class="my-hero">Single Book Page</h1>
-        <% if (locals.singleBook) { %>
-            <h2 class="book-title">
-                <%= singleBook.volumeInfo.title %>
-            </h2>
-            <h2 class="book-author">
-                <%= singleBook.volumeInfo.authors[0] %>
-            </h2>
-            <p class="book-description">
-                <%- singleBook.volumeInfo.description %>
-            </p>
-            <div>
-                <!-- POST Request made for review route serverside -->
-                <h3>Mark Book?</h3>
-                <form class="text-center pt-2 form-body border border-5 rounded-5 mark-box" action="/api/review"
-                    method="POST">
+        <div class="container">
+            <!-- Display Data from server side on page -->
+            <% if (locals.singleBook) { %>
+                <div class="row pt-5">
+                    <div class="col-sm-6">
+                        <!-- <img class="book-image col-2" src="<%= singleBook.volumeInfo.imageLinks.thumbnail %>"> -->
+                        <h2 class="book-title-hero my-hero">
+                            <%= singleBook.volumeInfo.title %>
+                        </h2>
+                        <h2 class="book-author">
+                            <%= singleBook.volumeInfo.authors[0] %>
+                        </h2>
+                        <p class="book-description">
+                            <%- singleBook.volumeInfo.description %>
+                        </p>
 
-                    <!-- Book ID captured for google api used serverside -->
-                    <label for="book" class="form-label cust-label pt-1 visually-hidden">book</label>
-                    <input class="visually-hidden" value="<%= singleBook.id%>" name="book"></input>
-
-                    <!-- Text For Review content -->
-                    <label for="content" class="form-label cust-label pt-1">Content</label>
-                    <textarea type="text" class="form-control border border-1 rounded-0 myText"
-                        id="exampleFormControlTextarea1" rows="10 "
-                        placeholder="this field is not required to mark book read or unread" name="content"></textarea>
-                    <!-- Submit button for text content of review -->
-                    <input class="btn btn-primary btn-lg my-3 create-button " type="submit" value="Make a Mark"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <!-- boolean checkbox -->
-                    <div class="btn-group post-review" role="group" aria-label="Basic checkbox toggle button group">
-                        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" name="btncheck1">
-                        <label class="btn btn-outline-primary post-review" for="btncheck1">mark read</label>
                     </div>
-                </form>
+                    <div class="col-sm-6 pb-4">
+                        <!-- POST Request made for review route serverside -->
+                        <h3 class="text-center mt-2 fs-1">Mark Book?</h3>
+                        <form class="text-center mark-box" action="/api/review" method="POST">
 
-            </div>
-            <% } %>
-            <!-- list all user reviews and link them with given ids -->
-            <% if (locals.reviews) { %>
-                <div class="user-review">
-                    <% reviews.forEach(review=> { %>
-                        <a href="/api/user/<%= review.dataValues.user_id %>">
-                            <p class="review-cont">
-                                <%= review.dataValues.content %>
-                            </p>
-                        </a>
-                        <% }); %>
-                </div>
+                            <!-- Book ID captured for google api used serverside -->
+                            <label for="book" class="form-label cust-label visually-hidden">book</label>
+                            <input class="visually-hidden" value="<%= singleBook.id%>" name="book"></input>
 
-                    <% } %>
-
-                        <% if (locals.logged_in) { %>
-                            <!-- Bootsrap Modal for confirmation -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Mark Successfully Made!
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <!-- Text For Review content -->
+                            <label for="content" class=" visually-hidden cust-label pt-1">Content</label>
+                            <textarea type="text" class="form-control border border-5 rounded-3 myText"
+                                id="exampleFormControlTextarea1" rows="10 "
+                                placeholder="This field is not required to mark a book read or unread, just want to mark a book? Click 'Mark as Read' and then Make Mark!"
+                                name="content"></textarea>
+                            <!-- Submit button for text content of review -->
+                            <input class="btn btn-success mt-2 create-button " type="submit" value="Make Mark"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <!-- boolean checkbox -->
+                            <div class="btn-group post-review pt-2" role="group"
+                                aria-label="Basic checkbox toggle button group">
+                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"
+                                    name="btncheck1">
+                                <label class="btn btn-outline-success post-review" for="btncheck1">Mark as Read</label>
                             </div>
-                            <% } %>
+                        </form>
+
+                    </div>
+                    <% } %>
+                        <hr class="custom-hr">
+
+                        <div class="">
+                            <h2 class="fs-2 mt-2">Reviews</h3>
+
+                                <!-- list all user reviews and link them with given ids -->
+                                <% if (locals.reviews) { %>
+                                    <% reviews.forEach(review=> { %>
+                                        <div class="">
+                                            <!-- Checks to see if there's content for the book review -->
+                                            <% if (review.dataValues.content) { %>
+                                                <!-- if there is denote that it's read -->
+                                                <% if (review.dataValues.mark_read) { %>
+                                                    <p class="read ">Read</p>
+                                                    <!-- if not then it's vice versa -->
+                                                    <% } else { %>
+                                                        <p class="not">Not <span class="read">Read</span></p>
+                                                        <% } %>
+                                                            <% } %>
+                                                                <!-- capturing the user id from review data to redirect user -->
+                                                                <a class="user-review"
+                                                                    href="/api/user/<%= review.dataValues.user_id %>">
+                                                                    <p class="review-user">
+                                                                        <%= review.dataValues.user %>
+                                                                    </p>
+                                                                    <p class="review-cont fs-4 link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
+                                                                        <%= review.dataValues.content %>
+                                                                    </p>
+                                                                </a>
+                                                                <% }); %>
+                                        </div>
+                                        <% } %>
+
+
+                                            <% if (locals.logged_in) { %>
+                                                <!-- Bootsrap Modal for confirmation -->
+                                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    Modal
+                                                                    title
+                                                                </h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Mark Successfully Made!
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                        </div>
+                </div>
 
     </body>
 
