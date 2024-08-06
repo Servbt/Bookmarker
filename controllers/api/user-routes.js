@@ -110,6 +110,7 @@ router.get('/:id', async (req, res) => {
         );
         // make an array with just book IDs
         let test = [];
+        
         reviews.forEach(review => {
             test.push(review.book)
         });

@@ -1,6 +1,6 @@
 <%- include("./components/navbar.ejs")%>
 
-    <body >
+    <body>
         <div class="container">
             <!-- checks if reviews are clients or another user's -->
             <div class="row">
@@ -10,12 +10,13 @@
                         <h1 class="user-name my-hero">
                             <%= userData.name %>'s Reviews
                         </h1>
-                        <a class="user-marks" href="/api/user/user-marks/<%= userData.id %>">
-                            go to <%= userData.name %>'s Marks?
-                                <%= userData.id %>
+                        <a class="user-marks pb-3 link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
+                            href="/api/user/user-marks/<%= userData.id %>">
+                            Go to <%= userData.name %>'s Marks?
+                                <!-- <%= userData.id %> -->
                         </a>
                         <% } %>
-                        <hr class="custom-hr">
+                            <hr class="custom-hr">
             </div>
             <!-- books user has reviewed-->
             <div class="row">
@@ -26,39 +27,51 @@
                             <% numb++ %>
                                 <!-- Checks to see if there is a review present for it to show data -->
                                 <% if (review.content) { %>
-                                    <div class="col col-sm-auto col-lg-3  m-3 border border-2 p-4 rounded-3 text-center">
+                                    <div
+                                        class="col col-sm-auto col-lg-3  m-3 border border-2 p-4 rounded-3 text-center">
                                         <h1 class="book-title book-card">
                                             <%= bookData[numb].volumeInfo.title %>
                                                 <!-- <form class="mark-box" action="/api/review/find" method="POST"> -->
-                                                <p class="visually-hidden book-id"><%= review.book %></p>
+                                                <p class="visually-hidden book-id">
+                                                    <%= review.book %>
+                                                </p>
                                                 <!-- </form> -->
-    
+
                                         </h1>
                                         <!-- takes user back to mark -->
                                         <p class="review-content">
                                             <%= review.content %>
                                         </p>
-                                        <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>" class="book-image "
-                                            alt="book cover">
+                                        <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>"
+                                            class="book-image " alt="book cover">
                                         </img>
                                         <br>
                                         <% if (!locals.userData) { %>
-                                            <div class="row col text-center mx-4 my-2">
-                                                <a class="mark-edit btn btn-outline-warning" href="/api/review/<%=review.id%>">
-                                                    Edit Mark?
-                                                </a>
-                                                <br>
-                                                <a class="mark-edit btn btn-outline-danger mt-2" href="/api/review/delete-review/<%=review.id%>">
-                                                    Delete Mark?
-                                                </a>
-    
-                                            </div>
-    
+                                            <!-- if there is denote that it's read -->
+                                            <% if (review.dataValues.mark_read) { %>
+                                                <p class="read ">Read</p>
+                                                <!-- if not then it's vice versa -->
+                                                <% } else { %>
+                                                    <p class="not">Not <span class="read">Read</span></p>
+                                                    <% } %>
+                                                        <div class="row col text-center mx-4 my-2">
+                                                            <a class="mark-edit btn btn-outline-warning"
+                                                                href="/api/review/<%=review.id%>">
+                                                                Edit Mark?
+                                                            </a>
+                                                            <br>
+                                                            <a class="mark-edit btn btn-outline-danger mt-2"
+                                                                href="/api/review/delete-review/<%=review.id%>">
+                                                                Delete Mark?
+                                                            </a>
+
+                                                        </div>
+                                                        <% } %>
+
                                     </div>
                                     <% } %>
-                                        <% } %>
-                                            <% }); %>
-                                                <% } %>
+                                        <% }); %>
+                                            <% } %>
             </div>
 
         </div>
