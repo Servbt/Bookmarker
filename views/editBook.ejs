@@ -29,9 +29,9 @@
 
                                 <!-- Text For Review content Filled already with previous review content -->
                                 <label for="content" class="visually-hidden form-label cust-label pt-1">Content</label>
-                                <textarea type="text" class="form-control border border-1 rounded-0 myText"
+                                <textarea type="text" class="form-control border border-5 rounded-3 myText"
                                     id="exampleFormControlTextarea1" rows="10 "
-                                    placeholder="this field is not required to mark book read or unread"
+                                    placeholder="This field is not required to mark a book read or unread, just want to mark a book? Click 'Mark as Read' and then Make Mark!"
                                     name="content"><%= reviewData.content %></textarea>
 
                                 <!-- Submit button for text content of review -->
@@ -49,45 +49,11 @@
                             <% } %>
 
                     </div>
-                    <!-- list all user reviews and link them with given ids -->
-                    <% if (locals.reviews) { %>
-                        <div class="user-review">
-                            <% reviews.forEach(review=> { %>
-                                <a href="/api/user/<%= review.dataValues.user_id %>">
-                                    <p class="review-cont">
-                                        <%= review.dataValues.content %>
-                                    </p>
-                                </a>
-                                <% }); %>
-                        </div>
+                    <hr class="custom-hr">
 
+                    <%- include("./components/user-reviews.ejs")%>
                         <% } %>
-                            <% } %>
-
-                                <% if (locals.logged_in) { %>
-                                    <!-- Bootsrap Modal for confirmation -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Success!</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Mark Successfully Updated!
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% } %>
                 </div>
-
         </div>
 
     </body>

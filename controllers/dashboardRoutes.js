@@ -40,12 +40,17 @@ router.post('/search', async (req, res) => {
 
     // getting each book
     const bookArr = response.data.items;
-    bookArr.forEach(item => {
-      searchList.push(item);
-    });
+
+    for (let index = 0; index < 3; index++) {
+      searchList.push(bookArr[index])
+      
+    }
+    // bookArr.forEach(item => {
+    //   searchList.push(item);
+    // });
 
     console.log(searchList[1].volumeInfo.title);
-    res.render('landing.ejs', { bookList: searchList });
+    res.render('home.ejs', { bookList: searchList, search: true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
