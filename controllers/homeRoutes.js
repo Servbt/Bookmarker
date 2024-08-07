@@ -15,13 +15,13 @@ router.get('/', async (req, res) => {
     const bookArr = response.data.items;
 
     // getting each book
-    for (let index = 0; index < 3; index++) {
-      books.push(bookArr[index])
+    // for (let index = 0; index < 3; index++) {
+    //   books.push(bookArr[index])
       
-    }
-    // bookArr.forEach(item => {
-    //   books.push(item);
-    // });
+    // }
+    bookArr.forEach(item => {
+      books.push(item);
+    });
 
     // console.log(books[0].volumeInfo.title);
     res.render('landing.ejs', { bookList: books, });
@@ -84,15 +84,15 @@ router.get('/home', async (req, res) => {
 
     const bookArr = response.data.items;
 
-    for (let index = 0; index < 3; index++) {
-      books.push(bookArr[index])
+    // for (let index = 0; index < 3; index++) {
+    //   books.push(bookArr[index])
       
-    }
+    // }
 
     // getting each book
-    // bookArr.forEach(item => {
-    //   books.push(item);
-    // });
+    bookArr.forEach(item => {
+      books.push(item);
+    });
 
     const user = userData.get({ plain: true });
     res.render('home.ejs', {

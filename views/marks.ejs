@@ -70,11 +70,9 @@
         </div>
 
         <%- include("../utils/bookIDfind.ejs") %>
-            <!-- Log out button -->
-            <form action="/api/user/logout" method="POST">
-                <button type="submit" class="btn btn-primary logout">Log
-                    Out</button>
-            </form>
+
+    <!-- Log out button -->
+    <%- include("./components/log-out.ejs")%>
 
 
     </body>
