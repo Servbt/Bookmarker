@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const axios = require('axios').default;
-
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const { Book, User, Review, Tag } = require('../models');
 const myKey = process.env.API_KEY;
