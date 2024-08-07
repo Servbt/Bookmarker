@@ -3,7 +3,7 @@
     $(function () {
         $(document).on("click", ".book-card", function (e) {
             var pID = $(this).find(".book-id").text();
-            $.post("http://localhost:3000/dashboard/singleBook", { "book": pID },
+            $.post("https://fierce-falls-25436-cd1145098578.herokuapp.com/dashboard/singleBook", { "book": pID },
                 function (data, status) {
                     // // Use the response data (HTML) to replace the current document
                     document.open();
