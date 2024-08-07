@@ -33,9 +33,7 @@
                                         <h1 class="book-title book-card">
                                             <%= bookData[numb].volumeInfo.title %>
                                                 <!-- <form class="mark-box" action="/api/review/find" method="POST"> -->
-                                                <p class="visually-hidden book-id">
-                                                    <%= review.book %>
-                                                </p>
+                                                <p class="visually-hidden book-id"><%= review.book %></p>
                                                 <!-- </form> -->
                                         </h1>
                                         <img src="<%= bookData[numb].volumeInfo.imageLinks.thumbnail %>"

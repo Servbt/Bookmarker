@@ -41,13 +41,13 @@ router.post('/search', async (req, res) => {
     // getting each book
     const bookArr = response.data.items;
 
-    for (let index = 0; index < 3; index++) {
-      searchList.push(bookArr[index])
+    // for (let index = 0; index < 3; index++) {
+    //   searchList.push(bookArr[index])
       
-    }
-    // bookArr.forEach(item => {
-    //   searchList.push(item);
-    // });
+    // }
+    bookArr.forEach(item => {
+      searchList.push(item);
+    });
 
     console.log(searchList[1].volumeInfo.title);
     res.render('home.ejs', { bookList: searchList, search: true });
@@ -62,10 +62,26 @@ router.post('/singleBook', async (req, res) => {
   try {
     // target id from book clicked (post request made from bookIDfind.js) 
     let bookID = req.body.book;
+  
     // find all reviews for book that was clicked on
-    // console.log(bookID);
     const reviews = await Review.findAll({ where:{ book: bookID } });
-    // console.log(reviews);
+    // make an array with just book IDs
+    let test = [];
+    reviews.forEach(review => {
+      test.push(review.user_id)
+    });
+    // console.log(test);
+
+    // Gets all user names for reviews under
+    const requests = test.map(user => {
+      return User.findOne({where: {id: user},
+        attributes: {
+          exclude: ['password']
+        }})
+    });
+    const results = await Promise.all(requests);
+    // console.log(results);
+    const userNames = results.map(result => result.name);
 
     // getting all data for one book
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookID}?key=${myKey}`);
@@ -76,7 +92,8 @@ router.post('/singleBook', async (req, res) => {
     res.render('singleBook.ejs', { 
       singleBook: bookData ,
        logged_in: req.session.logged_in,
-       reviews: reviews
+       reviews: reviews,
+       users: userNames
       });
   } catch (err) {
     console.error(err);

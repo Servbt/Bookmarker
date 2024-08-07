@@ -88,6 +88,7 @@ router.get('/home', async (req, res) => {
       books.push(bookArr[index])
       
     }
+
     // getting each book
     // bookArr.forEach(item => {
     //   books.push(item);
