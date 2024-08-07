@@ -71,9 +71,10 @@
 
         <%- include("../utils/bookIDfind.ejs") %>
 
-    <!-- Log out button -->
+        <!-- Log out button -->
+    <% if (!locals.userData) { %>
     <%- include("./components/log-out.ejs")%>
-
+    <% } %>
 
     </body>
 
