@@ -5,10 +5,10 @@ const session = require('express-session');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
-const port = 3000;
-
+const port = process.env.PORT || 3000;
 
 const sess = {
   secret: 'Super secret secret',

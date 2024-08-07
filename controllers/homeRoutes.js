@@ -3,7 +3,7 @@ const axios = require('axios').default;
 
 const { Sequelize } = require('sequelize');
 const { Book, User, Review, Tag } = require('../models');
-const myKey = 'AIzaSyAWkq6glcnzeDFA_dtgJORBns4mhh1K9Vk';
+const myKey = process.env.API_KEY;
 
 
 // home page, calling google api for a sample selection of books

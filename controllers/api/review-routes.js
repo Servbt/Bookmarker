@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { Review, User } = require("../../models");
+require('dotenv').config();
 const axios = require('axios').default;
 const withAuth = require("../../utils/auth");
-const myKey = 'AIzaSyAWkq6glcnzeDFA_dtgJORBns4mhh1K9Vk';
+const myKey = process.env.API_KEY;
 
 // makes and saves a review into the data base
 router.post("/", withAuth, async (req, res) => {

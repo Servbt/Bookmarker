@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { User, Review, Book } = require('../../models');
+require('dotenv').config();
 const axios = require('axios').default;
-const myKey = 'AIzaSyAWkq6glcnzeDFA_dtgJORBns4mhh1K9Vk';
+const myKey = process.env.API_KEY;
 
 
 
