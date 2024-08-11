@@ -1,9 +1,19 @@
 # Bookmarker 
 
+![Web page](./public/images/bookmarker.png)
+
 ###  Conceptualization:
 
 After having recently read a couple of books myself I'd like to keep track of said books alongside new ones that I'd like to read. So with that in mind The point of this website will be for a user to make a list of books they want to read and/or have read. I'll place a pseudo-code of functionality below:
 
+###  Technologies:
+ 
+-   Axios
+-   Bcrypt
+-   EJS
+-   Express
+-   Sequelize
+-   Postgres
 
 ### Pseudo-code
 
